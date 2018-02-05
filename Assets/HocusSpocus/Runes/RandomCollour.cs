@@ -11,6 +11,7 @@ public class RandomCollour : MonoBehaviour {
     [SerializeField]
     private float _TimeNominal;
     private float _Timer;
+    private Color _GetColor;
 	// Use this for initialization
 	void Start () {
         _RuneArray = new GameObject[_Runes.transform.childCount];
@@ -25,9 +26,16 @@ public class RandomCollour : MonoBehaviour {
         _Timer += Time.deltaTime;
         if(_Timer > Random.Range(_TimeNominal - 5, _TimeNominal + 5))
         {
+            _GetColor = _Color[Random.Range(0, _Color.Count)];
             GameObject ChosenOne = _RuneArray[Random.Range(0, _RuneArray.Length - 1)];
-            ChosenOne.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = _Color[Random.Range(0, _Color.Count)];
+            ChosenOne.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = _GetColor;
             _Timer = 0;
         }
 	}
+
+
+    public Color GetColor()
+    {
+        return _GetColor;
+    }
 }
